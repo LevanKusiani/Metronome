@@ -37,6 +37,10 @@
   transition: all 0.3s ease 0s;
 }
 
+.beat-step-disabled.dark {
+  border: 3px solid #2a2a2a;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
