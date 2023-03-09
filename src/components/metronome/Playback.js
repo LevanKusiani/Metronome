@@ -1,9 +1,11 @@
-import "./Playback.css";
+import styles from "./Playback.module.css";
 
-const Playback = ({play, onButtonClick}) => {
+const Playback = ({play, isDark, onButtonClick}) => {
   return (
     <div>
-      <button onClick={onButtonClick}>{play}</button>
+      <button
+        className={`${styles.playback} ${isDark && styles.dark}`}
+        onClick={onButtonClick}>{play}</button>
     </div>
   );
 };
