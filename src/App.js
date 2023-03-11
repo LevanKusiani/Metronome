@@ -107,6 +107,7 @@ function App() {
             isDark={appState.isDark} />
           <Tempo
             tempo={appState.tempo}
+            isDark={appState.isDark}
             onWheelScroll={tempoWheelHandler}
             onButtonClick={tempoClickHandler}
           />
