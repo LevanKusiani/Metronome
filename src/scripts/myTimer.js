@@ -22,9 +22,9 @@ function play() {
 }
 
 function updateParams(tempo, beat) {
-  console.log(`entered timer update: ${tempo}, ${beat}`);
+  // console.log(`entered timer update: ${tempo}, ${beat}`);
 
-  currentBpm = (60 / tempo) * 1000; //tempo;
+  currentBpm = (60 / tempo) * 1000;
   currentBeat = beat;
 }
 
@@ -32,6 +32,7 @@ function stop() {
   if (timer !== undefined) {
     clearTimeout(timer);
     timer = undefined;
+    beatCtr = 0;
   }
 }
 
