@@ -6,10 +6,14 @@ const Beat = ({ beat, isDark, onWheelScroll }) => {
 
     for (let i = 0; i < 8; i++) {
         if(i < val){
-            list.push(<div className={`${styles['beat-step']} ${isDark && styles.dark}`}></div>);
+            list.push(<div
+              key={Math.random().toString()}
+              className={`${styles['beat-step']} ${isDark && styles.dark}`}></div>);
         }
         else{
-            list.push(<div className={`${styles['beat-step-disabled']} ${isDark && styles.dark}`}></div>);
+            list.push(<div
+              key={Math.random().toString()}
+              className={`${styles['beat-step-disabled']} ${isDark && styles.dark}`}></div>);
         }
     //   const clsName = "beat-step" + (i < val ? "" : "-disabled");
     //   list.push(<div className={`${clsName} ${isDark && styles.dark}`}></div>);

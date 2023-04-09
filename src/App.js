@@ -5,6 +5,7 @@ import Playback from "./components/metronome/Playback";
 import Tempo from "./components/metronome/Tempo";
 import Beat from "./components/metronome/Beat";
 import Switch from "./components/UI/Switch";
+import Search from "./components/metronome/Search";
 
 import "./App.css";
 
@@ -17,13 +18,14 @@ function App() {
     isPlaying: false,
     isDark: false,
   });
-
+  
   useEffect(() => {
-    document.addEventListener("keydown", keyDownHandler, true);
+    //document.addEventListener("keydown", keyDownHandler, true);
   }, []);
 
   useEffect(() => {
     updateParams(appState.tempo, appState.beat);
+    console.log("aq?>");
   }, [appState.tempo, appState.beat]);
 
   const keyDownHandler = (e) => {
@@ -97,6 +99,7 @@ function App() {
   return (
     <div className={`Page ${appState.isDark && "Dark"}`}>
       <div className="Header">
+        <Search />
         <Switch isDark={appState.isDark} onSwitch={switchHandler} />
       </div>
       <div className={`App ${appState.isDark && "Dark"}`}>
@@ -104,7 +107,8 @@ function App() {
           <Playback
             play={appState.play}
             onButtonClick={playbackHandler}
-            isDark={appState.isDark} />
+            isDark={appState.isDark}
+          />
           <Tempo
             tempo={appState.tempo}
             isDark={appState.isDark}
@@ -114,7 +118,8 @@ function App() {
           <Beat
             beat={appState.beat}
             onWheelScroll={beatWheelHandler}
-            isDark={appState.isDark} />
+            isDark={appState.isDark}
+          />
         </div>
       </div>
     </div>
