@@ -1,4 +1,5 @@
 import styles from "./Beat.module.css";
+import "./BeatAnimation.css";
 
 const Beat = ({ beat, isDark, onWheelScroll }) => {
   const createItems = (val) => {
@@ -28,6 +29,7 @@ const Beat = ({ beat, isDark, onWheelScroll }) => {
         <h1 onWheel={(event) => onWheelScroll(event)}>{beat}</h1>
       </div>
       <div
+        id="beat-board"
         onWheel={(event) => onWheelScroll(event)}
         className={`${styles["beat-container"]}`}
       >

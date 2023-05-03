@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { play, updateParams, stop } from "./scripts/myTimer";
+import { initialize, play, updateParams, stop } from "./scripts/metronome";
 
 import Playback from "./components/metronome/Playback";
 import Tempo from "./components/metronome/Tempo";
@@ -18,30 +18,26 @@ function App() {
     isPlaying: false,
     isDark: false,
   });
-  
+
   useEffect(() => {
-    //document.addEventListener("keydown", keyDownHandler, true);
+    initialize();
   }, []);
 
   useEffect(() => {
     updateParams(appState.tempo, appState.beat);
-    console.log("aq?>");
   }, [appState.tempo, appState.beat]);
-
-  const keyDownHandler = (e) => {
-    //if (e.key === " ")
-    //playbackHandler();
-  };
 
   const playbackHandler = () => {
     if (appState.play === "Start") {
       updateParams(appState.tempo, appState.beat);
       play();
+      
       setAppState((prevState) => {
         return { ...prevState, play: "Stop", isPlaying: true };
       });
     } else {
       stop();
+      
       setAppState((prevState) => {
         return { ...prevState, play: "Start", isPlaying: false };
       });

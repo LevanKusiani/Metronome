@@ -10,10 +10,6 @@ const localData = [
 const Search = () => {
   const [dataList, setDataList] = useState([]);
   
-//   fetch("https://api.tunebat.com/api/tracks/search?term=charlie red&page=1")
-//   .then((response) => response.json())
-//   .then((data) => console.log(data));
-
   const createItems = (data) => {
     let list = [];
 

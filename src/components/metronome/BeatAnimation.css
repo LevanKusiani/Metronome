@@ -1,0 +1,15 @@
+.flicker {
+  animation: 2s ease-in-out lightUp;
+}
+
+@keyframes lightUp {
+  0% {
+    background-color: #000;
+  }
+  25% {
+    background-color: #eef0f2;
+  }
+  100% {
+    background-color: #eef0f2;
+  }
+}

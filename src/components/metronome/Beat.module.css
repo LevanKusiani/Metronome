@@ -54,10 +54,3 @@
     transform: rotate(360deg);
   }
 }
-
-@keyframes lightUp {  
-    0% { background-color: #000; }
-    15% { background-color: #EEF0F2; }
-    100% { background-color: #EEF0F2; }
-  }
-  
