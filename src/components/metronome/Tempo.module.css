@@ -7,7 +7,7 @@
   min-width: 300px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: baseline;
 }
 
@@ -21,7 +21,9 @@
 }
 
 .bpm p {
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 0;
   margin: 0 0 0 10px;
   user-select: none;
   -moz-user-select: none;

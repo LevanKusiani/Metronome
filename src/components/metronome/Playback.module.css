@@ -12,6 +12,12 @@
   transition: all 0.3s ease 0s;
 }
 
+.playback svg {
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+}
+
 button:hover {
   /* background-color: #2EE59D; */
   background-color: #d7d9db;
@@ -23,7 +29,7 @@ button:hover {
 
 .playback.dark {
   border: 10px solid #eef0f2;
-  color: #eef0f2;
+  fill: #eef0f2;
   background-color: #121212;  
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }

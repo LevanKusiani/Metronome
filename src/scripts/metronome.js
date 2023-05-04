@@ -62,19 +62,29 @@ function play() {
   if (!audioContext) {
     audioContext = new AudioContext();
 
-    soundLowArrayBuffer.then((buffer) => {
-      audioContext.decodeAudioData(buffer, function (buffer) {
-        soundLowBuffer = buffer;
+    soundLowArrayBuffer
+      .then((buffer) => {
+        audioContext.decodeAudioData(buffer, function (buffer) {
+          soundLowBuffer = buffer;
+        });
+      })
+      .catch(() => {
+        console.warn("failed to load low tick sound.");
       });
-    }).catch(() => { console.warn("failed to load low tick sound.") });
 
-    soundHighArrayBuffer.then((buffer) => {
-      audioContext.decodeAudioData(buffer, function (buffer) {
-        soundHighBuffer = buffer;
+    soundHighArrayBuffer
+      .then((buffer) => {
+        audioContext.decodeAudioData(buffer, function (buffer) {
+          soundHighBuffer = buffer;
 
-        soundsLoaded = true;
+          soundsLoaded = true;
+        });
+      })
+      .catch(() => {
+        console.warn("failed to load high tick sound.");
       });
-    }).catch(() => { console.warn("failed to load high tick sound.") });
+  } else {
+    audioContext.resume();
   }
 
   if (!unlocked) {
@@ -96,9 +106,9 @@ function updateParams(newTempo, beat) {
 }
 
 function stop() {
+  audioContext.suspend();
   beatCtr = 0;
-  clearBeatBoard();
-  //clear();
+  clear();
 
   worker.postMessage({
     command: "stop",
@@ -106,8 +116,6 @@ function stop() {
 }
 
 function scheduler() {
-  //TODO: resolve the pause/play bug
-
   while (nextNoteTime < audioContext.currentTime + scheduleAheadTime) {
     scheduleNote(beatCtr, nextNoteTime);
     countNextNoteTime();
@@ -115,40 +123,21 @@ function scheduler() {
 }
 
 function scheduleNote(beatNumber, time) {
-  //TODO: refactor this scheduler
-
   //Playing sounds using Audio Buffer
-  if(soundsLoaded){
-    const source = audioContext.createBufferSource();
+  const source = audioContext.createBufferSource();
 
-    if (beatNumber % currentBeat === 0){
-      source.buffer = soundHighBuffer;
-    }
-    else{
-      source.buffer = soundLowBuffer;
-    }
-  
-    source.connect(audioContext.destination);
-  
-    source.start(time);
-    source.stop(time + noteLength);
-    
-    flickerBeatElement();
-    // flickerBeatTile(beatNumber, noteLength);
+  if (beatNumber % currentBeat === 0) {
+    source.buffer = soundHighBuffer;
+  } else {
+    source.buffer = soundLowBuffer;
   }
-  else{
-    // Playing sounds using Oscillator
-    var osc = audioContext.createOscillator();
-    osc.connect(audioContext.destination);
 
-    if (beatNumber % currentBeat === 0)
-      osc.frequency.value = 440.0;
-    else
-      osc.frequency.value = 220.0;
+  source.connect(audioContext.destination);
 
-    osc.start(time);
-    osc.stop(time + noteLength);
-  }
+  source.start(time);
+  // source.stop(time + noteLength);
+
+  flickerBeatTile(beatNumber, noteLength);
 }
 
 function countNextNoteTime() {
@@ -156,26 +145,6 @@ function countNextNoteTime() {
 
   nextNoteTime += secondsPerBeat;
   beatCtr = (beatCtr + 1) % currentBeat;
-}
-
-function flickerBeatElement() {
-  console.log("flickering: " + beatCtr + ", " + noteLength);
-
-  document
-    .querySelector("#beat-board")
-    .childNodes[beatCtr].classList.add("flicker");
-
-  setTimeout(() => {
-    document
-      .querySelector("#beat-board")
-      .childNodes[beatCtr].classList.remove("flicker");
-  }, noteLength);
-}
-
-function clearBeatBoard() {
-  Array.from(document.querySelector("#beat-board").childNodes).forEach((x) =>
-    x.classList.remove("flicker")
-  );
 }
 
 export { initialize, play, updateParams, stop, scheduler };

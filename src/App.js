@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { initialize, play, updateParams, stop } from "./scripts/metronome";
 
 import Playback from "./components/metronome/Playback";
@@ -14,7 +14,6 @@ function App() {
   const [appState, setAppState] = useState({
     tempo: 100,
     beat: 4,
-    play: "Start",
     isPlaying: false,
     isDark: false,
   });
@@ -22,27 +21,41 @@ function App() {
   useEffect(() => {
     initialize();
   }, []);
-
-  useEffect(() => {
-    updateParams(appState.tempo, appState.beat);
-  }, [appState.tempo, appState.beat]);
-
-  const playbackHandler = () => {
-    if (appState.play === "Start") {
+  
+  const playbackHandler = useCallback(() => {
+    if (!appState.isPlaying) {
       updateParams(appState.tempo, appState.beat);
       play();
       
       setAppState((prevState) => {
-        return { ...prevState, play: "Stop", isPlaying: true };
+        return { ...prevState, isPlaying: true };
       });
     } else {
       stop();
       
       setAppState((prevState) => {
-        return { ...prevState, play: "Start", isPlaying: false };
+        return { ...prevState, isPlaying: false };
       });
     }
-  };
+  }, [appState.isPlaying, appState.tempo, appState.beat]);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.keyCode === 32) {
+        playbackHandler();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [playbackHandler]);
+
+  useEffect(() => {
+    updateParams(appState.tempo, appState.beat);
+  }, [appState.tempo, appState.beat]);
 
   const tempoWheelHandler = (val, e) => {
     if (e.deltaY < 0) {
@@ -101,7 +114,7 @@ function App() {
       <div className={`App ${appState.isDark && "Dark"}`}>
         <div className="App-content">
           <Playback
-            play={appState.play}
+            isPlaying={appState.isPlaying}
             onButtonClick={playbackHandler}
             isDark={appState.isDark}
           />

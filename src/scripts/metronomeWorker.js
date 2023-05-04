@@ -5,7 +5,6 @@ onmessage = (event) => {
   if(event.data.command){
     switch(event.data.command){
       case "play": {
-        // console.log("starting player...");
         intervalId = setInterval(() => {
           postMessage("tick");
         }, interval);
@@ -13,7 +12,6 @@ onmessage = (event) => {
         break;
       }
       case "stop": {
-        // console.log("stopping player...");
         clearInterval(intervalId);
         intervalId = null;
         
