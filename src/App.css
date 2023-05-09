@@ -10,7 +10,7 @@
 .Header {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: space-between;
   padding: 20px 15px;
 }
 
@@ -47,4 +47,8 @@
 
 .App.Dark {
   color: #eef0f2;
+}
+
+.empty-container{
+  width: 60px;
 }

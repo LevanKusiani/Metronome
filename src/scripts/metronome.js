@@ -5,7 +5,6 @@ import { flickerBeatTile, clear } from "./animator.js";
 let worker;
 let currentBeat;
 let beatCtr = 0;
-let soundsLoaded = false;
 let soundLowArrayBuffer;
 let soundHighArrayBuffer;
 let soundLowBuffer;
@@ -76,8 +75,6 @@ function play() {
       .then((buffer) => {
         audioContext.decodeAudioData(buffer, function (buffer) {
           soundHighBuffer = buffer;
-
-          soundsLoaded = true;
         });
       })
       .catch(() => {
