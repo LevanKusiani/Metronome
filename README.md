@@ -1,3 +1,5 @@
-# My first React app [In progress]
+# Metronome ⏲🎶 [In progress]
 
-This project is for educational purposes.
+This is my first React JS app for a simple metronome.
+
+🏗🚧👷‍ will populate this preperly very very soon 👷‍♂️🚧🏗
