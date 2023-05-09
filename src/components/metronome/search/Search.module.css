@@ -1,0 +1,18 @@
+.dropdown-content {
+  position: relative;
+  min-width: 350px;
+  z-index: 1;
+}
+
+.searchbar {
+  font-size: 16px;
+  min-width: 450px;
+  padding: 8px 15px 6px 15px;
+  background-color: #f6f6f6;
+  border: 1px solid #cecece;
+  border-radius: 25px;
+}
+
+.searchbar:active {
+  border: 1px solid red !important;
+}
