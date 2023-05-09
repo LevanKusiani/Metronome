@@ -1,4 +1,5 @@
-<center># Metronome ⏲🎶 [In progress ⚙]</center>
+## Metronome ⏲🎶 [In progress ⚙]
+
 
 This is my first React JS app for a simple metronome.
 
