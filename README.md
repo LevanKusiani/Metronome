@@ -38,11 +38,11 @@ Using this API I get both the thread freedom and time precision. In order not to
 
 ## Installation
 
-npm install
+```npm install```
 
 ## Usage
 
-npm start
+```npm start```
 
 ## Acknowledgments
 
