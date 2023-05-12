@@ -3,10 +3,11 @@ import { getTrackDetails } from "../../../clients/spotifyApiClient";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import styles from "./SearchBox.module.css";
-import { ControlContext } from "../../../context/controlContext.js";
+import { ControlContext, ThemeContext } from "../../../context/appContext.js";
 
 const SearchBox = ({ isActive, items }) => {
-  const { control, setControl } = useContext(ControlContext);
+  const { setControl } = useContext(ControlContext);
+  const { theme } = useContext(ThemeContext);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackId, setTrackId] = useState(null);
@@ -20,6 +21,13 @@ const SearchBox = ({ isActive, items }) => {
       }
     }
   }, [isActive]);
+
+  useEffect(() => {
+    const thumbColor = theme === 'dark' ? '#444' : '#ccc';
+    const trackColor = theme === 'dark' ? '#222' : '#aaa';
+    document.documentElement.style.setProperty('--scrollbar-thumb-color', thumbColor);
+    document.documentElement.style.setProperty('--scrollbar-track-color', trackColor);
+  }, [theme]);
 
   const playAudio = (src) => {
     audio.current = new Audio(src);
@@ -36,15 +44,15 @@ const SearchBox = ({ isActive, items }) => {
   const selectHandler = async (id) => {
     const response = await getTrackDetails(id);
 
-    if(response){
+    if (response) {
       setControl((prevState) => {
         return {
           ...prevState,
-          tempo: Math.trunc(response.audio_features.tempo),
+          tempo: Math.trunc(response.audio_features[0].tempo),
         };
       });
-    }else{
-        //TODO: implement a proper error mechanism
+    } else {
+      //TODO: implement a proper error mechanism
     }
   };
 
@@ -69,17 +77,29 @@ const SearchBox = ({ isActive, items }) => {
   };
 
   const createItems = () => {
-    return items.map((item, index) => (
-      <SearchResultElement
-        key={item.id}
-        elementId={index}
-        playingTrackId={trackId}
-        isPlaying={isPlaying}
-        trackInfo={item}
-        onSelect={selectHandler}
-        onPreview={previewHandler}
-      />
-    ));
+    if (!items || items.length === 0) {
+      return (
+        <div
+          className={`${styles["search-empty"]} ${
+            theme === "dark" && styles.dark
+          }`}
+        >
+          <h5>No tracks found :(</h5>
+        </div>
+      );
+    } else {
+      return items.map((item, index) => (
+        <SearchResultElement
+          key={item.id}
+          elementId={index}
+          playingTrackId={trackId}
+          isPlaying={isPlaying}
+          trackInfo={item}
+          onSelect={selectHandler}
+          onPreview={previewHandler}
+        />
+      ));
+    }
   };
 
   const dropdownIsVisible = isActive && items.length > 0;

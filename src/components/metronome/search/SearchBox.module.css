@@ -6,6 +6,7 @@
   max-height: 500px;
   overflow: auto;
   opacity: 0;
+  padding-right: 3px;
   transition: opacity 0.3s ease-in-out;
   pointer-events: none;
 }
@@ -15,20 +16,61 @@
   pointer-events: initial;
 }
 
+.search-empty {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f6f6f6;
+  color: black;
+  text-decoration: none;
+  cursor: default;
+}
+
+.search-empty h5 {
+  color: #323232;
+}
+
+.search-empty.dark {
+  background-color: #242424;
+  color-scheme: dark;
+}
+
+.search-empty.dark h5 {
+  color: #fff;
+  color-scheme: dark;
+}
+
+:root {
+  --scrollbar-thumb-color: #ccc;
+  --scrollbar-thumb-color-dark: #444;
+  --scrollbar-track-color: #aaa;
+  --scrollbar-track-color-dark: #222;
+}
+
 /* For Chrome, Safari, and Opera */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: var(--scrollbar-thumb-color);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+  background-color: var(--scrollbar-track-color);
+}
+
+::-webkit-scrollbar-thumb.dark {
+  background-color: var(--scrollbar-thumb-color-dark);
+}
+
+::-webkit-scrollbar-thumb.dark:hover {
+  background-color: var(--scrollbar-track-color-dark);
 }

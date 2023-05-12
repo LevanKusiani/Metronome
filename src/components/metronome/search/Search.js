@@ -1,21 +1,32 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { searchTracks } from "../../../clients/spotifyApiClient";
 import SearchBox from "./SearchBox";
 import styles from "./Search.module.css";
+import { ThemeContext } from "../../../context/appContext";
 
 const Search = () => {
   const [dataList, setDataList] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
-  const handleMouseClick = useCallback((e) => {
-    if((Boolean(e.target.closest("[class*='element-container']")) && !Boolean(e.target.closest("[class*='preview']")))){
-      setIsSearching(false);
-    }
-    if (isSearching && (!e.target || !Boolean(e.target.closest("#search-container")))) {
-      setIsSearching(false);
-    }
-  }, [isSearching]);
+  const handleMouseClick = useCallback(
+    (e) => {
+      const isInSearch = !Boolean(e.target.closest("#search-container"));
+      const isInThemeSwitch = !Boolean(e.target.closest("#theme-changer"));
+
+      if (
+        Boolean(e.target.closest("[class*='element-container']")) &&
+        !Boolean(e.target.closest("[class*='preview']"))
+      ) {
+        setIsSearching(false);
+      }
+      if (isSearching && (!e.target || (isInSearch && isInThemeSwitch))) {
+        setIsSearching(false);
+      }
+    },
+    [isSearching]
+  );
 
   useEffect(() => {
     document.addEventListener("click", handleMouseClick);
@@ -30,9 +41,9 @@ const Search = () => {
     if (query.length > 0) {
       const tracksResponse = await searchTracks(query);
 
-      if(tracksResponse){
+      if (tracksResponse) {
         setDataList(tracksResponse.tracks.items);
-      }else{
+      } else {
         //TODO: implement a proper error mechanism
       }
     } else {
@@ -49,7 +60,8 @@ const Search = () => {
   return (
     <div id="search-container" className={`${styles["dropdown-content"]}`}>
       <input
-        className={`${styles.searchbar}`}
+        id="track-searcher"
+        className={`${styles.searchbar} ${theme === "dark" && styles.dark}`}
         type="text"
         placeholder="Search.."
         onFocus={focusHandler}

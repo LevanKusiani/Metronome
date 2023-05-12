@@ -13,6 +13,17 @@
   border-radius: 25px;
 }
 
-.searchbar:active {
-  border: 1px solid red !important;
+.searchbar.dark {
+  background-color: #121212;
+  border: 1px solid #eef0f2;
+  color: #eef0f2;
+}
+
+.searchbar.dark::placeholder {
+  color: #eef0f2;
+  opacity: 1; /* Firefox */
+}
+
+.searchbar:focus-visible {
+  outline: none;
 }
