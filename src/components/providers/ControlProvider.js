@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ControlContext } from "../../context/controlContext";
+import { ControlContext } from "../../context/appContext";
 
 const ControlProvider = ({ children }) => {
   const [control, setControl] = useState({

@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import styles from "./Tempo.module.css";
-import { ControlContext } from "../../../context/controlContext";
+import { ControlContext, ThemeContext } from "../../../context/appContext";
 
-const Tempo = ({ isDark }) => {
+const Tempo = () => {
   const { control, setControl } = useContext(ControlContext);
+  const { theme } = useContext(ThemeContext);
 
   const tempoWheelHandler = (val, e) => {
     if (e.deltaY < 0) {
@@ -36,7 +37,7 @@ const Tempo = ({ isDark }) => {
 
   return (
     <div className={`${styles["bpm-container"]}`}>
-      <div className={`${styles["bpm-buttons"]} ${isDark && styles.dark}`}>
+      <div className={`${styles["bpm-buttons"]} ${(theme === "dark") && styles.dark}`}>
         <svg
           viewBox="0 0 448 512"
           onClick={() => tempoClickHandler(-10)}
@@ -58,7 +59,7 @@ const Tempo = ({ isDark }) => {
         </h1>
         <p>BPM</p>
       </div>
-      <div className={`${styles["bpm-buttons"]} ${isDark && styles.dark}`}>
+      <div className={`${styles["bpm-buttons"]} ${(theme === "dark") && styles.dark}`}>
         <svg
           viewBox="0 0 256 512"
           onClick={() => tempoClickHandler(1)}
@@ -66,7 +67,11 @@ const Tempo = ({ isDark }) => {
         >
           <path d="M246.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 41.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
         </svg>
-        <svg viewBox="0 0 448 512" onClick={() => tempoClickHandler(10)} alt="+10">
+        <svg
+          viewBox="0 0 448 512"
+          onClick={() => tempoClickHandler(10)}
+          alt="+10"
+        >
           <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L370.7 256 233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L178.7 256 41.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" />
         </svg>
       </div>

@@ -15,6 +15,17 @@
   background-color: #ddd;
 }
 
+.element-container.dark {
+  background-color: #242424;
+  color: #fff;
+  border-bottom: 1px solid #2d2d2d;
+  color-scheme: dark;
+}
+
+.element-container.dark:hover {
+  background-color: #2f2f2f;
+}
+
 .album-logo {
   display: flex;
   justify-content: center;
@@ -40,6 +51,14 @@
   color: #888;
 }
 
+.track-info.dark h4 {
+  color: #f6f6f6;
+}
+
+.track-info.dark p {
+  color: #bababa;
+}
+
 .preview {
   display: flex;
   justify-content: center;
@@ -51,16 +70,35 @@
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  border: 1px solid #5e5e5e;
-  background-color: #5e5e5e;
-  color: #fff;
+  border: 1px solid;
+  border-color: #121212;
+  background-color: #121212;
+  fill: #eef0f2;
   transition: 0.3s;
   cursor: pointer;
 }
 
+.preview button svg {
+  width: 12px;
+}
+
 .preview button:hover {
-    border: 1px solid #2d2d2d;
-    background-color: #2d2d2d;
-    color: #fff;
-    transform: none;
-  }
+  border: 1px solid #2d2d2d;
+  background-color: #2d2d2d;
+  fill: #eef0f2;
+  transform: none;
+}
+
+.preview.dark button {
+  border-color: #000;
+  background-color: #000;
+  fill: #eef0f2;
+}
+
+.preview.dark button:hover {
+  border: 1px solid #000;
+  background-color: #000;
+  fill: #fff;
+  transform: none;
+  box-shadow: none;
+}

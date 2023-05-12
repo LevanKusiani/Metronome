@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import styles from "./Beat.module.css";
 import "./BeatAnimation.css";
-import { ControlContext } from "../../../context/controlContext";
+import { ControlContext, ThemeContext } from "../../../context/appContext";
 
-const Beat = ({ isDark }) => {
+const Beat = () => {
   const { control, setControl } = useContext(ControlContext);
+  const { theme } = useContext(ThemeContext);
 
   const beatWheelHandler = (e) => {
     if (e.deltaY < 0)
@@ -27,16 +28,21 @@ const Beat = ({ isDark }) => {
     let list = [];
 
     for (let i = 0; i < 8; i++) {
-        if(i < control.beat){
-            list.push(<div
-              key={Math.random().toString()}
-              className={`${styles['beat-step']} ${isDark && styles.dark}`}></div>);
-        }
-        else{
-            list.push(<div
-              key={Math.random().toString()}
-              className={`${styles['beat-step-disabled']} ${isDark && styles.dark}`}></div>);
-        }
+      if (i < control.beat) {
+        list.push(
+          <div
+            key={Math.random().toString()}
+            className={`${styles["beat-step"]} ${(theme === "dark") && styles.dark}`}
+          ></div>
+        );
+      } else {
+        list.push(
+          <div
+            key={Math.random().toString()}
+            className={`${styles["beat-step-disabled"]} ${(theme === "dark") && styles.dark}`}
+          ></div>
+        );
+      }
     }
 
     return list;
