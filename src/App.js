@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { initialize } from "./scripts/metronome";
 
 import Playback from "./components/metronome/playback/Playback";
@@ -11,10 +11,11 @@ import Controller from "./components/metronome/controls/Controller";
 import Tempo from "./components/metronome/controls/Tempo";
 import Beat from "./components/metronome/controls/Beat";
 import { ThemeContext } from "./context/appContext";
+import Auth from "./components/UI/auth/Auth";
 
 function App() {
   const {theme} = useContext(ThemeContext);
-
+  
   useEffect(() => {
     initialize();
   }, []);
@@ -22,10 +23,10 @@ function App() {
   return (
     <ControlProvider>
       <div className={`Page ${(theme === "dark") && "Dark"}`}>
-        <div className="Header">
+        <div className="header">
           <div className="empty-container"></div>
           <Search />
-          <Switch />
+          <Auth />
         </div>
         <div className={`App ${(theme === "dark") && "Dark"}`}>
           <div className="App-content">
@@ -35,6 +36,9 @@ function App() {
               <Beat />
             </Controller>
           </div>
+        </div>
+        <div className="footer">
+          <Switch />
         </div>
       </div>
     </ControlProvider>

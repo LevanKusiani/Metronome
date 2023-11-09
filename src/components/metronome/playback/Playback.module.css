@@ -18,7 +18,7 @@
   display: block;
 }
 
-button:hover {
+.playback:hover {
   /* background-color: #2EE59D; */
   background-color: #d7d9db;
   /* box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */

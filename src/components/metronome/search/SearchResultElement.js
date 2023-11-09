@@ -13,13 +13,13 @@ const SearchResultElement = ({
   const { theme } = useContext(ThemeContext);
 
   const clickHandler = () => {
-    onSelect(trackInfo.id);
+    onSelect(trackInfo.tempo);
   };
 
   const previewHandler = (e) => {
     e.stopPropagation();
 
-    onPreview(elementId, trackInfo.preview_url);
+    onPreview(elementId, trackInfo.previewUrl);
   };
 
   return (
@@ -30,14 +30,13 @@ const SearchResultElement = ({
       onClick={() => clickHandler()}
     >
       <div className={`${styles["album-logo"]}`}>
-        <img src={trackInfo.album.images[2].url} alt={trackInfo.album.name} />
-        {/* width="50" height="50" */}
+        <img src={trackInfo.imageUrl} alt={trackInfo.albumName} />
       </div>
       <div
         className={`${styles["track-info"]} ${theme === "dark" && styles.dark}`}
       >
         <h4>{trackInfo.name}</h4>
-        <p>{trackInfo.artists[0].name}</p>
+        <p>{trackInfo.artistName}</p>
         {/* <p>{trackInfo.album.name}</p> */}
       </div>
       <div className={`${styles.preview} ${theme === "dark" && styles.dark}`}>

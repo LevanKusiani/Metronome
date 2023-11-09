@@ -1,0 +1,25 @@
+.search-empty {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f6f6f6;
+  color: black;
+  text-decoration: none;
+  cursor: default;
+}
+
+.search-empty h5 {
+  color: #323232;
+}
+
+.search-empty.dark {
+  background-color: #242424;
+  color-scheme: dark;
+}
+
+.search-empty.dark h5 {
+  color: #fff;
+  color-scheme: dark;
+}

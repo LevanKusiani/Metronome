@@ -5,18 +5,26 @@
 }
 
 .searchbar {
-  font-size: 16px;
+  font-size: 18px;
   min-width: 450px;
-  padding: 8px 15px 6px 15px;
+  padding: 10px 15px 8px 15px;
   background-color: #f6f6f6;
-  border: 1px solid #cecece;
+  border: none;
   border-radius: 25px;
+  --shadow: rgba(17, 17, 26, 0.15) 0px 2px 6px, rgba(17, 17, 26, 0.05) 0px 6px 22px;
+  box-shadow: var(--shadow);
+}
+
+.searchbar:disabled {
+  background-color: #e4e4e4;
 }
 
 .searchbar.dark {
-  background-color: #121212;
-  border: 1px solid #eef0f2;
+  background-color: #181818;
+  /* border: 1px solid #eef0f2; */
+  border: none;
   color: #eef0f2;
+  --shadow: rgba(0, 0, 0, 0.85) 0px 0px 16px, rgba(0, 0, 0, 0.05) 0px 6px 22px;
 }
 
 .searchbar.dark::placeholder {

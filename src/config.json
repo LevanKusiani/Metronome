@@ -1,6 +1,5 @@
 {
-    "SPOTIFYAPI": {
-        "AUTH_URL": "https://accounts.spotify.com/",
-        "BASE_URL": "https://api.spotify.com/"
+    "EASYAPI": {
+        "BASE_URL": "https://localhost:7149/"
     }
 }

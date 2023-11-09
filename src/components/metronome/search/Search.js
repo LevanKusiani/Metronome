@@ -1,14 +1,18 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { debounce } from "lodash";
-import { searchTracks } from "../../../clients/spotifyApiClient";
 import SearchBox from "./SearchBox";
 import styles from "./Search.module.css";
-import { ThemeContext } from "../../../context/appContext";
+import { AuthContext, ThemeContext } from "../../../context/appContext";
+import { getTrackDetails } from "../../../clients/easyApiClient";
+import SearchDropdown from "./SearchDropdown";
+import EmptyContainer from "../../UI/EmptyContainer";
 
 const Search = () => {
   const [dataList, setDataList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
   const { theme } = useContext(ThemeContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleMouseClick = useCallback(
     (e) => {
@@ -37,14 +41,21 @@ const Search = () => {
 
   const searchHandler = async (e) => {
     const query = e.target.value.trim();
+    setErrorMessage(null);
 
     if (query.length > 0) {
-      const tracksResponse = await searchTracks(query);
+      try {
+        const tracksResponse = await getTrackDetails(query);
 
-      if (tracksResponse) {
-        setDataList(tracksResponse.tracks.items);
-      } else {
-        //TODO: implement a proper error mechanism
+        if (tracksResponse) {
+          setDataList(tracksResponse);
+        } else {
+          setErrorMessage("Failed to load track details");
+          setDataList([]);
+        }
+      } catch (error) {
+        setErrorMessage("Something went wrong");
+        setDataList([]);
       }
     } else {
       setDataList([]);
@@ -55,6 +66,28 @@ const Search = () => {
     setIsSearching(true);
   };
 
+  const renderComponent = () => {
+    const dropdownIsVisible =
+      isSearching && (dataList.length > 0 || errorMessage?.length > 0);
+
+    if (errorMessage) {
+      return (
+        <SearchDropdown isDropdownVisible={dropdownIsVisible}>
+          <EmptyContainer message={errorMessage} />
+        </SearchDropdown>
+      );
+    } else {
+      return (
+        <SearchDropdown isDropdownVisible={dropdownIsVisible}>
+          <SearchBox
+            isActive={isSearching}
+            items={dataList}
+          />
+        </SearchDropdown>
+      );
+    }
+  };
+
   const debouncedSearchHandler = debounce(searchHandler, 1000);
 
   return (
@@ -62,12 +95,13 @@ const Search = () => {
       <input
         id="track-searcher"
         className={`${styles.searchbar} ${theme === "dark" && styles.dark}`}
+        disabled={!isAuthenticated}
         type="text"
         placeholder="Search.."
         onFocus={focusHandler}
         onKeyUp={debouncedSearchHandler}
       />
-      <SearchBox isActive={isSearching} items={dataList} />
+      {renderComponent()}
     </div>
   );
 };

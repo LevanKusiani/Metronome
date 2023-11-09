@@ -10,7 +10,8 @@ const Switch = () => {
   };
 
   return (
-    <label id="theme-changer" className={`${styles.switch}`}>
+    <div className={`${styles.main}`}>
+      <label id="theme-changer" className={`${styles.switch}`}>
       <input
         type="checkbox"
         defaultChecked={theme === "dark" ? true : false}
@@ -18,6 +19,7 @@ const Switch = () => {
       />
       <span className={`${styles.slider} ${styles.round}`}></span>
     </label>
+    </div>
   );
 };
 
