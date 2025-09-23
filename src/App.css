@@ -1,17 +1,15 @@
 .Page {
-  height: 100%;
-  min-height: 100%;
-	display: flex;
-	flex-direction: column;
-  background-color: #eef0f2;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #eef0f2;
 }
 
 .Header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px 15px;
+  padding: 8px 15px;
 }
 
 .App {
@@ -19,9 +17,9 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(7px + 1.2vmin);
   color: #000;
-  margin-top: 5%;
+  flex: 1;
 }
 
 .App-header {
@@ -32,13 +30,14 @@
 }
 
 .App-content {
-  width: 700px;
+  width: 550px;
   display: flex;
   flex-direction: column;
   align-self: center;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex: 1;
+  padding: 5px 0;
 }
 
 .Page.Dark {
@@ -49,6 +48,109 @@
   color: #eef0f2;
 }
 
+.Footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 20px 5px 20px;
+  background-color: transparent;
+  font-size: 10px;
+  color: #666;
+  flex-shrink: 0;
+  min-height: 25px;
+}
+
+.Footer.Dark {
+  color: #999;
+}
+
+.Footer a {
+  color: #1976d2;
+  text-decoration: none;
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+.Footer a:hover {
+  text-decoration: underline;
+}
+
+.Footer.Dark a {
+  color: #64b5f6;
+}
+
 .empty-container{
-  width: 60px;
+  width: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Header {
+    padding: 15px 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .App {
+    padding: 10px 0;
+    font-size: calc(8px + 2vmin);
+  }
+  
+  .App-content {
+    width: 90%;
+    max-width: 500px;
+    padding: 0 10px;
+  }
+  
+  .Footer {
+    padding: 8px 15px 12px 15px;
+    font-size: 11px;
+  }
+  
+  .empty-container {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Header {
+    padding: 10px 5px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .App {
+    padding: 5px 0;
+    font-size: calc(6px + 2vmin);
+  }
+  
+  .App-content {
+    width: 95%;
+    padding: 0 5px;
+  }
+  
+  .Footer {
+    padding: 5px 10px 10px 10px;
+    font-size: 10px;
+    text-align: center;
+  }
+  
+  .empty-container {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .App-content {
+    width: 800px;
+  }
+  
+  .Header {
+    padding: 25px 20px;
+  }
+  
+  .App {
+    padding: 30px 0;
+  }
 }

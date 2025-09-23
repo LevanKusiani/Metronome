@@ -1,14 +1,14 @@
 .playback {
-  width: 350px;
-  height: 350px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  border: 10px solid #000;
+  border: 8px solid #000;
   color: #000;
   font-weight: bold;
-  font-size: 80px;
+  font-size: 60px;
   background-color: #eef0f2;
   cursor: pointer;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease 0s;
 }
 
@@ -28,8 +28,8 @@ button:hover {
 }
 
 .playback.dark {
-  border: 10px solid #eef0f2;
+  border: 8px solid #eef0f2;
   fill: #eef0f2;
   background-color: #121212;  
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }

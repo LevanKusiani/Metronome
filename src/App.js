@@ -36,6 +36,14 @@ function App() {
             </Controller>
           </div>
         </div>
+        <footer className={`Footer ${(theme === "dark") && "Dark"}`}>
+          <p>
+            Song data powered by
+            <a href="https://getsongbpm.com" target="_blank" rel="noopener noreferrer">
+              GetSongBPM
+            </a>
+          </p>
+        </footer>
       </div>
     </ControlProvider>
   );
