@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ControlContext } from "../../context/appContext";
+import { METRONOME_CONFIG } from "../../constants/metronomeConfig";
 
 const ControlProvider = ({ children }) => {
   const [control, setControl] = useState({
-    tempo: 100,
-    beat: 4
+    tempo: METRONOME_CONFIG.DEFAULT_TEMPO,
+    beat: METRONOME_CONFIG.DEFAULT_BEATS
   });
 
   return (

@@ -1,6 +1,7 @@
 import soundLow from "../assets/Audio/Metronome/mtr-low.wav";
 import soundHigh from "../assets/Audio/Metronome/mtr-hi.wav";
 import { flickerBeatTile, clear } from "./animator.js";
+import { METRONOME_CONFIG } from "../constants/metronomeConfig";
 
 let worker;
 let currentBeat;
@@ -13,11 +14,11 @@ let soundHighBuffer;
 let audioContext;
 
 let unlocked = false;
-let tempo = 120.0;
-let lookahead = 25.0; //in milliseconds
-let scheduleAheadTime = 0.1; //in seconds
+let tempo = METRONOME_CONFIG.DEFAULT_TEMPO;
+let lookahead = METRONOME_CONFIG.LOOKAHEAD; //in milliseconds
+let scheduleAheadTime = METRONOME_CONFIG.SCHEDULE_AHEAD_TIME; //in seconds
 let nextNoteTime = 0.0;
-let noteLength = 0.05; //in seconds
+let noteLength = METRONOME_CONFIG.NOTE_LENGTH; //in seconds
 
 function initialize() {
   loadSounds();
@@ -29,11 +30,12 @@ function initialize() {
   worker.onmessage = (event) => {
     if (event.data === "tick") {
       scheduler();
-    } else console.log("message: " + event.data);
+    } else {
+      // Handle other message types if needed
+    }
   };
 
   return () => {
-    console.log("terminating worker...");
     worker.terminate();
   };
 }

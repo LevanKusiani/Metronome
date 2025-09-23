@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styles from "./Beat.module.css";
 import "./BeatAnimation.css";
 import { ControlContext, ThemeContext } from "../../../context/appContext";
+import { METRONOME_CONFIG, UI_CONFIG } from "../../../constants/metronomeConfig";
 
 const Beat = () => {
   const { control, setControl } = useContext(ControlContext);
@@ -12,14 +13,14 @@ const Beat = () => {
       setControl((prevState) => {
         return {
           ...prevState,
-          beat: prevState.beat < 8 ? prevState.beat + 1 : prevState.beat,
+          beat: prevState.beat < METRONOME_CONFIG.MAX_BEATS ? prevState.beat + 1 : prevState.beat,
         };
       });
     else
       setControl((prevState) => {
         return {
           ...prevState,
-          beat: prevState.beat > 2 ? prevState.beat - 1 : prevState.beat,
+          beat: prevState.beat > METRONOME_CONFIG.MIN_BEATS ? prevState.beat - 1 : prevState.beat,
         };
       });
   };
@@ -27,18 +28,18 @@ const Beat = () => {
   const createItems = () => {
     let list = [];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < UI_CONFIG.MAX_BEAT_STEPS; i++) {
       if (i < control.beat) {
         list.push(
           <div
-            key={Math.random().toString()}
+            key={`beat-active-${i}`}
             className={`${styles["beat-step"]} ${(theme === "dark") && styles.dark}`}
           ></div>
         );
       } else {
         list.push(
           <div
-            key={Math.random().toString()}
+            key={`beat-inactive-${i}`}
             className={`${styles["beat-step-disabled"]} ${(theme === "dark") && styles.dark}`}
           ></div>
         );

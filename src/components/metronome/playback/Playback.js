@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./Playback.module.css";
 import { play, updateParams, stop } from "../../../scripts/metronome";
 import { ControlContext, ThemeContext } from "../../../context/appContext";
+import { UI_CONFIG } from "../../../constants/metronomeConfig";
 
 const Playback = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -23,10 +24,10 @@ const Playback = () => {
 
   useEffect(() => {
     function handleKeyDown(event) {
-      if (event.keyCode === 32) {
+      if (event.keyCode === UI_CONFIG.SPACE_KEY_CODE) {
         const activeElement = document.activeElement;
 
-        if (activeElement.id !== "track-searcher") {
+        if (activeElement.id !== UI_CONFIG.SEARCH_INPUT_ID) {
           playbackHandler();
         }
       }

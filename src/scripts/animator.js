@@ -1,3 +1,5 @@
+import { METRONOME_CONFIG } from "../constants/metronomeConfig";
+
 function flickerBeatTile(tileNumber, delayLength) {
   const tile = document.querySelector("#beat-board").childNodes[tileNumber];
 
@@ -8,7 +10,7 @@ function flickerBeatTile(tileNumber, delayLength) {
 
   setTimeout(() => {
     tile.classList.remove(clsName);
-  }, 800);
+  }, METRONOME_CONFIG.BEAT_ANIMATION_DURATION);
 }
 
 function clear() {

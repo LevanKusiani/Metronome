@@ -50,8 +50,7 @@ export const searchTracks = async (query) => {
     const token = await getToken();
 
     if (!token || token === "") {
-      console.log("cannot make request at this moment, sorry :(");
-      return;
+      throw new Error("Unable to authenticate with Spotify API");
     }
 
     const response = await axios.get(

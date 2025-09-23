@@ -18,7 +18,7 @@ onmessage = (event) => {
         break;
       }
       default:
-        console.log("Invalid command name");
+        // Invalid command name
     }
   }
 
