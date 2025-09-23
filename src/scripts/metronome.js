@@ -23,7 +23,8 @@ let noteLength = METRONOME_CONFIG.NOTE_LENGTH; //in seconds
 function initialize() {
   loadSounds();
 
-  worker = new window.Worker(new URL("./metronomeWorker.js", import.meta.url));
+  // Create worker - use public folder for better compatibility
+  worker = new window.Worker(process.env.PUBLIC_URL + "/metronomeWorker.js");
 
   worker.postMessage({ interval: lookahead });
 
