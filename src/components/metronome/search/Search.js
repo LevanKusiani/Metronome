@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { debounce } from "lodash";
-import { searchTracks } from "../../../clients/spotifyApiClient";
+import { searchTracks } from "../../../clients/apiClient";
 import SearchBox from "./SearchBox";
 import styles from "./Search.module.css";
 import { ThemeContext } from "../../../context/appContext";
@@ -47,8 +47,19 @@ const Search = () => {
       try {
         const tracksResponse = await searchTracks(query);
 
-        if (tracksResponse && tracksResponse.tracks) {
-          setDataList(tracksResponse.tracks.items);
+        if (tracksResponse && tracksResponse.search) {
+          // Check if search contains an error
+          if (tracksResponse.search.error) {
+            setError("No tracks found. Please try a different search term.");
+            setDataList([]);
+          } else if (Array.isArray(tracksResponse.search)) {
+            setDataList(tracksResponse.search);
+          } else {
+            setError("No tracks found. Please try a different search term.");
+            setDataList([]);
+          }
+        } else if (tracksResponse && Array.isArray(tracksResponse)) {
+          setDataList(tracksResponse);
         } else {
           setError("No tracks found. Please try a different search term.");
           setDataList([]);

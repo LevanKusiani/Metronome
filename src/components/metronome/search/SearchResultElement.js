@@ -16,11 +16,7 @@ const SearchResultElement = ({
     onSelect(trackInfo.id);
   };
 
-  const previewHandler = (e) => {
-    e.stopPropagation();
-
-    onPreview(elementId, trackInfo.preview_url);
-  };
+  // Preview functionality removed - GetSongBPM doesn't provide audio previews
 
   return (
     <div
@@ -30,29 +26,38 @@ const SearchResultElement = ({
       onClick={() => clickHandler()}
     >
       <div className={`${styles["album-logo"]}`}>
-        <img src={trackInfo.album.images[2].url} alt={trackInfo.album.name} />
-        {/* width="50" height="50" */}
+        <div className={styles["bpm-indicator"]}>
+          <span>{trackInfo.tempo || 'N/A'}</span>
+          <small>BPM</small>
+        </div>
       </div>
       <div
         className={`${styles["track-info"]} ${theme === "dark" && styles.dark}`}
       >
-        <h4>{trackInfo.name}</h4>
-        <p>{trackInfo.artists[0].name}</p>
-        {/* <p>{trackInfo.album.name}</p> */}
-      </div>
-      <div className={`${styles.preview} ${theme === "dark" && styles.dark}`}>
-        <button onClick={(e) => previewHandler(e)}>
-          {isPlaying && elementId === playingTrackId ? (
-            <svg viewBox="0 0 32 32">
-              <path d="M5.92 24.096q0 0.832 0.576 1.408t1.44 0.608h16.128q0.832 0 1.44-0.608t0.576-1.408v-16.16q0-0.832-0.576-1.44t-1.44-0.576h-16.128q-0.832 0-1.44 0.576t-0.576 1.44v16.16z"></path>
-            </svg>
-          ) : (
-            <svg viewBox="0 0 384 512" transform="translate(1.5, 0)">
-              <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-            </svg>
+        <h4>{trackInfo.title || trackInfo.name}</h4>
+        <p>{trackInfo.artist?.name || trackInfo.artist}</p>
+        {trackInfo.album?.title && (
+          <p className={styles.album}>Album: {trackInfo.album.title}</p>
+        )}
+        <div className={styles.musicalInfo}>
+          {trackInfo.tempo && (
+            <span className={styles.tempo}>BPM: {trackInfo.tempo}</span>
           )}
-        </button>
+          {trackInfo.time_sig && (
+            <span className={styles.timeSig}>Time: {trackInfo.time_sig}</span>
+          )}
+          {trackInfo.key_of && (
+            <span className={styles.keyOf}>Key: {trackInfo.key_of}</span>
+          )}
+        </div>
       </div>
+      { /* <div className={`${styles.preview} ${theme === "dark" && styles.dark}`}>
+        <button onClick={(e) => previewHandler(e)}>
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,17L5,12L6.41,10.59L10,14.17L17.59,6.58L19,8L10,17Z" />
+          </svg>
+        </button>
+      </div> */}
     </div>
   );
 };

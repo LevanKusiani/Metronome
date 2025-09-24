@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Metronome/static/css/main.2e124204.css",
-    "main.js": "/Metronome/static/js/main.d8e68bae.js",
+    "main.css": "/Metronome/static/css/main.f7ad105f.css",
+    "main.js": "/Metronome/static/js/main.c82bb688.js",
     "static/js/453.920f7fea.chunk.js": "/Metronome/static/js/453.920f7fea.chunk.js",
     "static/media/mtr-low.wav": "/Metronome/static/media/mtr-low.16750ad431955fbd6af1.wav",
     "static/media/mtr-hi.wav": "/Metronome/static/media/mtr-hi.850b947b108e3b049c97.wav",
     "index.html": "/Metronome/index.html",
-    "main.2e124204.css.map": "/Metronome/static/css/main.2e124204.css.map",
-    "main.d8e68bae.js.map": "/Metronome/static/js/main.d8e68bae.js.map",
+    "main.f7ad105f.css.map": "/Metronome/static/css/main.f7ad105f.css.map",
+    "main.c82bb688.js.map": "/Metronome/static/js/main.c82bb688.js.map",
     "453.920f7fea.chunk.js.map": "/Metronome/static/js/453.920f7fea.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e124204.css",
-    "static/js/main.d8e68bae.js"
+    "static/css/main.f7ad105f.css",
+    "static/js/main.c82bb688.js"
   ]
 }

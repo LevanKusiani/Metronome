@@ -1,5 +1,5 @@
 import SearchResultElement from "./SearchResultElement.js";
-import { getTrackDetails } from "../../../clients/spotifyApiClient";
+import { getTrackDetails } from "../../../clients/apiClient";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import styles from "./SearchBox.module.css";
@@ -42,42 +42,55 @@ const SearchBox = ({ isActive, items }) => {
   };
 
   const selectHandler = async (id) => {
-    const response = await getTrackDetails(id);
+    try {
+      const response = await getTrackDetails(id);
 
-    if (response) {
-      setControl((prevState) => {
-        return {
-          ...prevState,
-          tempo: Math.trunc(response.audio_features[0].tempo),
-        };
-      });
-    } else {
-      //TODO: implement a proper error mechanism
+      if (response && response.tempo) {
+        setControl((prevState) => {
+          return {
+            ...prevState,
+            tempo: Math.trunc(response.tempo),
+          };
+        });
+      } else {
+        console.error("No tempo data available for this track");
+      }
+    } catch (error) {
+      console.error("Error getting track details:", error);
     }
   };
 
   const previewHandler = (id, src) => {
-    if (!isPlaying) {
-      playAudio(src);
-      setTrackId(id);
-      setIsPlaying(true);
-    } else {
-      if (audio) {
-        audio.current.pause();
+    // GetSongBPM doesn't provide audio previews, so we'll just select the track
+    if (src) {
+      if (!isPlaying) {
+        playAudio(src);
+        setTrackId(id);
+        setIsPlaying(true);
+      } else {
+        if (audio) {
+          audio.current.pause();
 
-        if (trackId !== null && trackId !== id) {
-          setTrackId(id);
-          playAudio(src);
-        } else {
-          setIsPlaying(false);
-          clearTimeout(timeoutId);
+          if (trackId !== null && trackId !== id) {
+            setTrackId(id);
+            playAudio(src);
+          } else {
+            setIsPlaying(false);
+            clearTimeout(timeoutId);
+          }
         }
       }
+    } else {
+      // No preview available, just select the track
+      selectHandler(id);
     }
   };
 
+  // Ensure items is always an array
+  const safeItems = Array.isArray(items) ? items : [];
+
   const createItems = () => {
-    if (!items || items.length === 0) {
+    if (safeItems.length === 0) {
       return (
         <div
           className={`${styles["search-empty"]} ${
@@ -88,7 +101,7 @@ const SearchBox = ({ isActive, items }) => {
         </div>
       );
     } else {
-      return items.map((item, index) => (
+      return safeItems.map((item, index) => (
         <SearchResultElement
           key={item.id}
           elementId={index}
@@ -102,7 +115,7 @@ const SearchBox = ({ isActive, items }) => {
     }
   };
 
-  const dropdownIsVisible = isActive && items.length > 0;
+  const dropdownIsVisible = isActive && safeItems.length > 0;
 
   return (
     <div
