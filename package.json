@@ -2,7 +2,7 @@
   "name": "metronome-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://LevanKusiani.github.io/Metronome",
+  "homepage": "https://levankusiani.github.io/Metronome",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
