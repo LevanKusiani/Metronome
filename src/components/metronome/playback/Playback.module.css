@@ -33,3 +33,57 @@ button:hover {
   background-color: #121212;  
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .playback {
+    width: 220px;
+    height: 220px;
+    border: 6px solid #000;
+    font-size: 50px;
+  }
+  
+  .playback.dark {
+    border: 6px solid #eef0f2;
+  }
+}
+
+@media (max-width: 480px) {
+  .playback {
+    width: 180px;
+    height: 180px;
+    border: 5px solid #000;
+    font-size: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .playback.dark {
+    border: 5px solid #eef0f2;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 12px rgba(97, 98, 98, 0.4);
+  }
+}
+
+@media (max-width: 360px) {
+  .playback {
+    width: 150px;
+    height: 150px;
+    border: 4px solid #000;
+    font-size: 32px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .playback.dark {
+    border: 4px solid #eef0f2;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 10px rgba(97, 98, 98, 0.4);
+  }
+}

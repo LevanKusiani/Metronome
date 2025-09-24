@@ -64,3 +64,52 @@
   background-color: #1a237e;
   border-color: #283593;
 }
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .dropdown-content {
+    min-width: 280px;
+  }
+  
+  .searchbar {
+    font-size: 14px;
+    min-width: 300px;
+    padding: 6px 12px 5px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown-content {
+    min-width: 250px;
+  }
+  
+  .searchbar {
+    font-size: 13px;
+    min-width: 250px;
+    padding: 5px 10px 4px 10px;
+  }
+  
+  .error, .loading {
+    font-size: 12px;
+    padding: 6px;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .dropdown-content {
+    min-width: 220px;
+  }
+  
+  .searchbar {
+    font-size: 12px;
+    min-width: 220px;
+    padding: 4px 8px 3px 8px;
+  }
+  
+  .error, .loading {
+    font-size: 11px;
+    padding: 4px;
+    margin-top: 4px;
+  }
+}

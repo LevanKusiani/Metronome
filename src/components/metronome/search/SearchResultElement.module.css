@@ -114,6 +114,144 @@
   background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%) !important;
 }
 
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .element-container {
+    min-height: 70px;
+  }
+  
+  .album-logo {
+    min-width: 60px;
+    padding: 8px;
+  }
+  
+  .bpm-indicator {
+    min-width: 50px;
+    padding: 6px 10px;
+  }
+  
+  .bpm-indicator span {
+    font-size: 16px;
+  }
+  
+  .bpm-indicator small {
+    font-size: 9px;
+  }
+  
+  .track-info h4 {
+    font-size: 14px;
+  }
+  
+  .track-info p {
+    font-size: 12px;
+  }
+  
+  .album {
+    font-size: 10px;
+  }
+  
+  .musicalInfo span {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .element-container {
+    min-height: 60px;
+  }
+  
+  .album-logo {
+    min-width: 50px;
+    padding: 6px;
+  }
+  
+  .bpm-indicator {
+    min-width: 45px;
+    padding: 5px 8px;
+  }
+  
+  .bpm-indicator span {
+    font-size: 14px;
+  }
+  
+  .bpm-indicator small {
+    font-size: 8px;
+  }
+  
+  .track-info {
+    padding: 6px;
+    gap: 1px;
+  }
+  
+  .track-info h4 {
+    font-size: 13px;
+  }
+  
+  .track-info p {
+    font-size: 11px;
+  }
+  
+  .album {
+    font-size: 9px;
+  }
+  
+  .musicalInfo {
+    gap: 4px;
+    margin-top: 2px;
+  }
+  
+  .musicalInfo span {
+    font-size: 8px;
+    padding: 1px 3px;
+  }
+}
+
+@media (max-width: 360px) {
+  .element-container {
+    min-height: 55px;
+  }
+  
+  .album-logo {
+    min-width: 45px;
+    padding: 5px;
+  }
+  
+  .bpm-indicator {
+    min-width: 40px;
+    padding: 4px 6px;
+  }
+  
+  .bpm-indicator span {
+    font-size: 12px;
+  }
+  
+  .bpm-indicator small {
+    font-size: 7px;
+  }
+  
+  .track-info {
+    padding: 5px;
+  }
+  
+  .track-info h4 {
+    font-size: 12px;
+  }
+  
+  .track-info p {
+    font-size: 10px;
+  }
+  
+  .album {
+    font-size: 8px;
+  }
+  
+  .musicalInfo span {
+    font-size: 7px;
+    padding: 1px 2px;
+  }
+}
+
 .track-info {
   flex: 1;
   display: flex;

@@ -69,3 +69,66 @@
 .bpm-buttons.dark svg {
     fill: #eef0f2;
 }
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .bpm {
+    min-width: 180px;
+  }
+  
+  .bpm h1 {
+    font-size: 80px;
+  }
+  
+  .bpm p {
+    font-size: 13px;
+  }
+  
+  .bpm-buttons svg {
+    width: 35px;
+    height: 35px;
+    margin: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bpm {
+    min-width: 150px;
+  }
+  
+  .bpm h1 {
+    font-size: 60px;
+  }
+  
+  .bpm p {
+    font-size: 12px;
+    margin: 0 0 0 8px;
+  }
+  
+  .bpm-buttons svg {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .bpm {
+    min-width: 130px;
+  }
+  
+  .bpm h1 {
+    font-size: 50px;
+  }
+  
+  .bpm p {
+    font-size: 11px;
+    margin: 0 0 0 6px;
+  }
+  
+  .bpm-buttons svg {
+    width: 25px;
+    height: 25px;
+    margin: 8px;
+  }
+}

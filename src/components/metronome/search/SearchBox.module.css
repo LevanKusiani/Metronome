@@ -74,3 +74,54 @@
 ::-webkit-scrollbar-thumb.dark:hover {
   background-color: var(--scrollbar-track-color-dark);
 }
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .search-options {
+    max-height: 400px;
+    margin-top: 4px;
+  }
+  
+  .search-empty {
+    padding: 15px;
+  }
+  
+  .search-empty h5 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-options {
+    max-height: 300px;
+    margin-top: 3px;
+    padding-right: 2px;
+  }
+  
+  .search-empty {
+    padding: 12px;
+  }
+  
+  .search-empty h5 {
+    font-size: 13px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .search-options {
+    max-height: 250px;
+    margin-top: 2px;
+  }
+  
+  .search-empty {
+    padding: 10px;
+  }
+  
+  .search-empty h5 {
+    font-size: 12px;
+  }
+}
