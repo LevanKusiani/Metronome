@@ -25,25 +25,37 @@ const Beat = () => {
       });
   };
 
+  const beatClickHandler = (beatValue) => {
+    // Only allow clicking on beats 2-8
+    if (beatValue >= 2 && beatValue <= 8) {
+      setControl((prevState) => {
+        return {
+          ...prevState,
+          beat: beatValue,
+        };
+      });
+    }
+  };
+
   const createItems = () => {
     let list = [];
 
     for (let i = 0; i < UI_CONFIG.MAX_BEAT_STEPS; i++) {
-      if (i < control.beat) {
-        list.push(
-          <div
-            key={`beat-active-${i}`}
-            className={`${styles["beat-step"]} ${(theme === "dark") && styles.dark}`}
-          ></div>
-        );
-      } else {
-        list.push(
-          <div
-            key={`beat-inactive-${i}`}
-            className={`${styles["beat-step-disabled"]} ${(theme === "dark") && styles.dark}`}
-          ></div>
-        );
-      }
+      const beatValue = i + 1; // Beat values are 1-indexed
+      const isActive = i < control.beat;
+      const isClickable = beatValue >= 2 && beatValue <= 8;
+      
+      list.push(
+        <div
+          key={`beat-${i}`}
+          className={`${isActive ? styles["beat-step"] : styles["beat-step-disabled"]} ${(theme === "dark") && styles.dark}`}
+          onClick={isClickable ? () => beatClickHandler(beatValue) : undefined}
+          style={{ 
+            cursor: isClickable ? 'pointer' : 'default'
+          }}
+          title={isClickable ? `Set to ${beatValue} beats` : 'Beat 1 is not clickable'}
+        ></div>
+      );
     }
 
     return list;

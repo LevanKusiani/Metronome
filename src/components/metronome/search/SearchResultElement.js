@@ -4,19 +4,14 @@ import { ThemeContext } from "../../../context/appContext";
 
 const SearchResultElement = ({
   elementId,
-  playingTrackId,
-  isPlaying,
   trackInfo,
   onSelect,
-  onPreview,
 }) => {
   const { theme } = useContext(ThemeContext);
 
   const clickHandler = () => {
-    onSelect(trackInfo.id);
+    onSelect(trackInfo);
   };
-
-  // Preview functionality removed - GetSongBPM doesn't provide audio previews
 
   return (
     <div
