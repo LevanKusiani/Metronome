@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import styles from "./SearchResultElement.module.css";
 import { ThemeContext } from "../../../context/appContext";
+import { fetchAlbumCoverWithFallback } from "../../../utils/albumCoverFetcher";
 
 const SearchResultElement = ({
   elementId,
@@ -8,6 +9,36 @@ const SearchResultElement = ({
   onSelect,
 }) => {
   const { theme } = useContext(ThemeContext);
+  const [albumCover, setAlbumCover] = useState(null);
+  const [coverLoading, setCoverLoading] = useState(false);
+  const [coverError, setCoverError] = useState(false);
+
+  // Fetch album cover when component mounts
+  useEffect(() => {
+    const loadAlbumCover = async () => {
+      if (!trackInfo.uri) {
+        return;
+      }
+      
+      setCoverLoading(true);
+      setCoverError(false);
+      
+      try {
+        const coverUrl = await fetchAlbumCoverWithFallback(trackInfo.uri);
+        if (coverUrl) {
+          setAlbumCover(coverUrl);
+        } else {
+          setCoverError(true);
+        }
+      } catch (error) {
+        setCoverError(true);
+      } finally {
+        setCoverLoading(false);
+      }
+    };
+
+    loadAlbumCover();
+  }, [trackInfo.uri, trackInfo.title, trackInfo.name]);
 
   const clickHandler = () => {
     onSelect(trackInfo);
@@ -21,10 +52,29 @@ const SearchResultElement = ({
       onClick={() => clickHandler()}
     >
       <div className={`${styles["album-logo"]}`}>
-        <div className={styles["bpm-indicator"]}>
-          <span>{trackInfo.tempo || 'N/A'}</span>
-          <small>BPM</small>
-        </div>
+        {albumCover ? (
+          <div className={styles["album-cover-container"]}>
+            <img 
+              src={albumCover} 
+              alt={`${trackInfo.title || trackInfo.name} album cover`}
+              className={styles["album-cover"]}
+              onError={() => setCoverError(true)}
+            />
+            {/* <div className={styles["bpm-overlay"]}>
+              <span>{trackInfo.tempo || 'N/A'}</span>
+              <small>BPM</small>
+            </div> */}
+          </div>
+        ) : coverLoading ? (
+          <div className={styles["cover-loading"]}>
+            <div className={styles["loading-spinner"]}></div>
+          </div>
+        ) : (
+          <div className={styles["bpm-indicator"]}>
+            <span>{trackInfo.tempo || 'N/A'}</span>
+            <small>BPM</small>
+          </div>
+        )}
       </div>
       <div
         className={`${styles["track-info"]} ${theme === "dark" && styles.dark}`}

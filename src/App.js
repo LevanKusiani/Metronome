@@ -23,10 +23,9 @@ function App() {
     <ControlProvider>
       <div className={`Page ${(theme === "dark") && "Dark"}`}>
         <div className="Header">
-          <div className="empty-container"></div>
           <Search />
-          <Switch />
         </div>
+        <Switch />
         <div className={`App ${(theme === "dark") && "Dark"}`}>
           <div className="App-content">
             <Playback />

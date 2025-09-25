@@ -70,7 +70,7 @@ const SearchBox = ({ isActive, items }) => {
       id="search-block"
       className={`${styles["search-options"]} ${
         dropdownIsVisible && styles["active-dropdown"]
-      }`}
+      } ${theme === "dark" && styles.dark}`}
     >
       {createItems()}
     </div>
