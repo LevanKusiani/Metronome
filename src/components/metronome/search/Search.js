@@ -50,18 +50,18 @@ const Search = () => {
         if (tracksResponse && tracksResponse.search) {
           // Check if search contains an error
           if (tracksResponse.search.error) {
-            setError("No tracks found. Please try a different search term.");
+            setError("No tracks found. Please try a different song name.");
             setDataList([]);
           } else if (Array.isArray(tracksResponse.search)) {
             setDataList(tracksResponse.search);
           } else {
-            setError("No tracks found. Please try a different search term.");
+            setError("No tracks found. Please try a different song name.");
             setDataList([]);
           }
         } else if (tracksResponse && Array.isArray(tracksResponse)) {
           setDataList(tracksResponse);
         } else {
-          setError("No tracks found. Please try a different search term.");
+          setError("No tracks found. Please try a different song name.");
           setDataList([]);
         }
       } catch (err) {
@@ -94,6 +94,7 @@ const Search = () => {
         onKeyUp={debouncedSearchHandler}
         disabled={isLoading}
       />
+      <SearchBox isActive={isSearching} items={dataList} />
       {error && (
         <div className={`${styles.error} ${theme === "dark" && styles.dark}`}>
           {error}
@@ -104,7 +105,6 @@ const Search = () => {
           Searching...
         </div>
       )}
-      <SearchBox isActive={isSearching} items={dataList} />
     </div>
   );
 };

@@ -56,11 +56,16 @@
 .error {
   color: #d32f2f;
   font-size: 14px;
-  margin-top: 8px;
   padding: 8px;
   background-color: #ffebee;
   border-radius: 4px;
   border: 1px solid #ffcdd2;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  text-align: center;
 }
 
 .error.dark {
@@ -72,11 +77,16 @@
 .loading {
   color: #1976d2;
   font-size: 14px;
-  margin-top: 8px;
   padding: 8px;
   background-color: #e3f2fd;
   border-radius: 4px;
   border: 1px solid #bbdefb;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  text-align: center;
 }
 
 .loading.dark {
@@ -120,7 +130,6 @@
   .error, .loading {
     font-size: 12px;
     padding: 6px;
-    margin-top: 6px;
   }
 }
 
@@ -142,6 +151,5 @@
   .error, .loading {
     font-size: 11px;
     padding: 4px;
-    margin-top: 4px;
   }
 }
